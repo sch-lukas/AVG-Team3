@@ -1,6 +1,7 @@
 namespace PaymentAPI;
 
-public class PaymentRückmeldung
+public record PaymentRückmeldung(string id, bool erfolgreich)
 {
-    
+    public string Id => id;
+    public bool Erfolgreich => Erfolgreich;
 }

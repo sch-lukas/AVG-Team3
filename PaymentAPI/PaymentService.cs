@@ -1,3 +1,5 @@
+using PaymentAPI;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,7 +16,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost()
-
+app.MapPost("/payment", (PaymentWeiterleitung weiterleitung, Payment payment) =>
+{
+    PaymentRückmeldung rückmeldung = weiterleitung.ExternerService(payment);
+    return rückmeldung;
+});
+    
 
 app.Run();
+
+public record Payment(string Id, string Währung, decimal Wert, string Zahlungsmethode);
+
+
+
