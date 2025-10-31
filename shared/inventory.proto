@@ -14,7 +14,7 @@ message CheckRequest {
   int32 quantity = 2;
 }
 
-// Die Daten, die dein Service als Antwort zurückgibt
+// Die Daten, die der Service als Antwort zurückgibt
 message CheckResponse {
   bool isAvailable = 1;
   string statusMessage = 2;
