@@ -2,7 +2,7 @@
 // src/server.ts — bootstrap
 // =============================
 import express from "express";
-import { ordersRouter } from "./routes/orders";
+import { ordersRouter } from "./routes/order";
 import { PORT, INVENTORY_URL, PAYMENT_URL } from "./config";
 
 
