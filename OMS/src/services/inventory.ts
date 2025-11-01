@@ -1,6 +1,8 @@
 import { OrderItem } from "../types";
 import { INVENTORY_URL } from "../config";
-
+// =============================
+// src/services/inventory.ts — only items[] → boolean
+// =============================
 
 export async function checkInventory(items: OrderItem[], orderId: string): Promise<boolean> {
 console.log(`[${orderId}] → Inventory: POST ${INVENTORY_URL}`);
