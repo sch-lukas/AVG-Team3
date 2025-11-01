@@ -14,7 +14,7 @@
 
 # Node.js
 node_modules/
-OMS\node_modules
+OMS/node_modules
 dist/
 .env
 *.log
