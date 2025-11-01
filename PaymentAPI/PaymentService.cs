@@ -16,16 +16,22 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("/payment", (PaymentWeiterleitung weiterleitung, Payment payment) =>
+app.MapPost("/payment", (Payment payment, Rückmeldung rückmeldung) => //eher fokus auf wert, also >200 = fail
 {
-    PaymentRückmeldung rückmeldung = weiterleitung.ExternerService(payment);
-    return rückmeldung;
+    if(payment.totalAmount>x) //Simulation ob erfolgreiche Zahlung oder nicht
+{
+return new Rückmeldung(payment.orderID, true) 
+}
+else
+{
+new Rückmeldung(payment.orderID, false) 
+}
 });
-    
 
 app.Run();
 
-public record Payment(string Id, string Währung, decimal Wert, string Zahlungsmethode);
+public record Payment(string orderId, decimal totalAmount);
+public record Rückmeldung(string orderID, bool zahlungErfolgreich);
 
 
 
