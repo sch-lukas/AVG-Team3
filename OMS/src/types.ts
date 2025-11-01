@@ -1,9 +1,10 @@
 export type OrderItem = { productId: string; quantity: number; price: number };
-
+export type Address = { street: string; city: string; zipCode: string; country: string };
+export type Customer = { customerId: string; prename: string; name: string };
 export type Order = {
-  orderId: string;
-  customer: { customerId: string; prename: string; name: string };
-  items: OrderItem[];
-  totalAmount: number;
-  shippingAddress: { street: string; city: string; zipCode: string; country: string };
+orderId: string;
+customer: Customer;
+items: OrderItem[];
+totalAmount: number;
+shippingAddress: Address;
 };
