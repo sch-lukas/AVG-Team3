@@ -12,4 +12,14 @@
 /dataSources/
 /dataSources.local.xml
 
+# Node.js
 node_modules/
+dist/
+.env
+*.log
+
+#IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
