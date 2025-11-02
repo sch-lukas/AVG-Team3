@@ -17,16 +17,31 @@ const inventoryProto: any = grpc.loadPackageDefinition(packageDefinition).invent
 
 // 3. Die eigentliche Logik für die "CheckAvailability"-Funktion
 const checkAvailability = (call: any, callback: any) => {
-    const {productId, quantity} = call.request;
-    console.log(`[Inventory Service] Prüfe Verfügbarkeit für ${quantity}x ${productId}...`);
+    const { items } = call.request;
+    console.log(`[Inventory Service] Prüfe Verfügbarkeit für ${items.length} Artikel...`);
 
-    // --- HIER IST DEINE SIMULATIONS-LOGIK ---
-    if (productId === 'P-FAIL') {
-        console.log(`[Inventory Service] Produkt ${productId} ist NICHT verfügbar.`);
-        callback(null, {isAvailable: false, statusMessage: 'Product not in stock'});
+    let allGood = true; // Wir starten optimistisch
+
+    // Gehe jeden Artikel in der Anfrage durch
+    for (const item of items) {
+        console.log(`[Inventory Service] -> Prüfe ${item.quantity}x ${item.productId}...`);
+
+        // --- HIER IST DEINE SIMULATIONS-LOGIK PRO ARTIKEL ---
+        if (item.productId === 'P-FAIL') {
+            allGood = false; // Einer ist nicht verfügbar!
+            console.log(`[Inventory Service] -> FEHLER: Produkt ${item.productId} ist NICHT verfügbar.`);
+            // Wir brechen die Schleife ab, da wir schon wissen, dass es fehlschlägt
+            break;
+        }
+    }
+
+    // Sende die Gesamt-Antwort basierend auf dem "allGood"-Flag
+    if (allGood) {
+        console.log('[Inventory Service] Alle Produkte sind verfügbar.');
+        callback(null, { allAvailable: true, statusMessage: 'All products available and reserved' });
     } else {
-        console.log(`[Inventory Service] Produkt ${productId} ist verfügbar.`);
-        callback(null, {isAvailable: true, statusMessage: 'Product available and reserved'});
+        console.log('[Inventory Service] Mindestens ein Produkt ist nicht verfügbar.');
+        callback(null, { allAvailable: false, statusMessage: 'At least one product is not in stock' });
     }
 };
 
