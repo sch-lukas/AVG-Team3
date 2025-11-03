@@ -1,4 +1,4 @@
-Inbetriebnahme OMS service:
+Inbetriebnahme OMS/Orchestrator service:
 
 Terminal im Projektverzeichnis: 
 cd .\OMS\
