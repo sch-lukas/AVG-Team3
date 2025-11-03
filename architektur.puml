@@ -1,0 +1,62 @@
+@startuml Shop
+' Titel des Diagramms
+title Shop AG - Prozess-Architektur (Kombinierte Version)
+
+'Skin
+skinparam componentStyle uml2
+skinparam packageStyle rectangle
+
+'
+' == Definition der Komponenten ==
+'
+
+' 1. Unsere zentrale Lösung
+package "Order- & Integrations-Plattform (REST)" {
+  component "Order- & Orchestrator-Service" as Orch
+}
+
+' 2. Die angebundenen Systeme
+package "Microservice (gRPC)" {
+  component "Inventory Service (IS)" as IS
+}
+
+package "Externer Service (REST)" {
+  component "Payment Service (PS)" as PS
+}
+
+package "Legacy System (MQ)" {
+  component "Warehouse (WMS)" as WMS
+}
+
+' 3. Infrastruktur-Komponenten
+package "Infrastruktur" {
+   queue "RabbitMQ" as MQ
+   database "Log-File" as Log
+}
+
+
+'
+' == Definition des Datenflusses ==
+'
+
+' 1. Bestandsprüfung
+Orch -> IS : 1. Bestand prüfen (gRPC)
+IS .-> Orch : 2. Antwort: Verfügbar (gRPC)
+
+' 2. Bezahlung (nach erfolgreicher Prüfung)
+Orch -> PS : 3. Bezahlung durchführen (REST API)
+PS .-> Orch : 4. Antwort: Erfolg (REST API)
+
+' 3. Versandauftrag (nach erfolgreicher Bezahlung)
+Orch -> MQ : 5. Versandauftrag (AMQP Publish)
+MQ --> WMS : 6. Auftrag empfangen (AMQP Consume)
+
+' 4. Status-Rückmeldung (asynchron)
+
+WMS --> MQ : 7. Status-Update (AMQP Publish)
+MQ .> Orch : 8. Status empfangen (AMQP Consume)
+
+' 5. Logging (passiert bei jedem Schritt)
+Orch .> Log : (loggt alle Schritte)
+
+@enduml
