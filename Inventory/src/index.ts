@@ -20,22 +20,18 @@ const checkAvailability = (call: any, callback: any) => {
     const { items } = call.request;
     console.log(`[Inventory Service] Prüfe Verfügbarkeit für ${items.length} Artikel...`);
 
-    let allGood = true; // Wir starten optimistisch
+    let allGood = true;
 
-    // Gehe jeden Artikel in der Anfrage durch
     for (const item of items) {
         console.log(`[Inventory Service] -> Prüfe ${item.quantity}x ${item.productId}...`);
 
-        // --- HIER IST DEINE SIMULATIONS-LOGIK PRO ARTIKEL ---
         if (item.productId === 'P-FAIL') {
-            allGood = false; // Einer ist nicht verfügbar!
+            allGood = false;
             console.log(`[Inventory Service] -> FEHLER: Produkt ${item.productId} ist NICHT verfügbar.`);
-            // Wir brechen die Schleife ab, da wir schon wissen, dass es fehlschlägt
             break;
         }
     }
 
-    // Sende die Gesamt-Antwort basierend auf dem "allGood"-Flag
     if (allGood) {
         console.log('[Inventory Service] Alle Produkte sind verfügbar.');
         callback(null, { allAvailable: true, statusMessage: 'All products available and reserved' });
@@ -51,7 +47,7 @@ const server = new grpc.Server();
 // Registriere unseren Service und seine Implementierung
 server.addService(inventoryProto.InventoryService.service, {checkAvailability});
 
-// Starte den Server auf Port 50051 (bindAsync startet den Server automatisch)
+// Starte den Server auf Port 50051
 server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), (err, port) => {
     if (err) {
         console.error(err);
