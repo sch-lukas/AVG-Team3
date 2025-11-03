@@ -17,16 +17,27 @@ const inventoryProto: any = grpc.loadPackageDefinition(packageDefinition).invent
 
 // 3. Die eigentliche Logik für die "CheckAvailability"-Funktion
 const checkAvailability = (call: any, callback: any) => {
-    const {productId, quantity} = call.request;
-    console.log(`[Inventory Service] Prüfe Verfügbarkeit für ${quantity}x ${productId}...`);
+    const { items } = call.request;
+    console.log(`[Inventory Service] Prüfe Verfügbarkeit für ${items.length} Artikel...`);
 
-    // --- HIER IST DEINE SIMULATIONS-LOGIK ---
-    if (productId === 'P-FAIL') {
-        console.log(`[Inventory Service] Produkt ${productId} ist NICHT verfügbar.`);
-        callback(null, {isAvailable: false, statusMessage: 'Product not in stock'});
+    let allGood = true;
+
+    for (const item of items) {
+        console.log(`[Inventory Service] -> Prüfe ${item.quantity}x ${item.productId}...`);
+
+        if (item.productId === 'P-FAIL') {
+            allGood = false;
+            console.log(`[Inventory Service] -> FEHLER: Produkt ${item.productId} ist NICHT verfügbar.`);
+            break;
+        }
+    }
+
+    if (allGood) {
+        console.log('[Inventory Service] Alle Produkte sind verfügbar.');
+        callback(null, { allAvailable: true, statusMessage: 'All products available and reserved' });
     } else {
-        console.log(`[Inventory Service] Produkt ${productId} ist verfügbar.`);
-        callback(null, {isAvailable: true, statusMessage: 'Product available and reserved'});
+        console.log('[Inventory Service] Mindestens ein Produkt ist nicht verfügbar.');
+        callback(null, { allAvailable: false, statusMessage: 'At least one product is not in stock' });
     }
 };
 
@@ -36,7 +47,7 @@ const server = new grpc.Server();
 // Registriere unseren Service und seine Implementierung
 server.addService(inventoryProto.InventoryService.service, {checkAvailability});
 
-// Starte den Server auf Port 50051 (bindAsync startet den Server automatisch)
+// Starte den Server auf Port 50051
 server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), (err, port) => {
     if (err) {
         console.error(err);

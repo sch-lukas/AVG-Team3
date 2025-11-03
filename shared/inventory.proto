@@ -8,14 +8,18 @@ service InventoryService {
   rpc CheckAvailability(CheckRequest) returns (CheckResponse);
 }
 
-// Die Daten, die der Aufrufer schicken muss
-message CheckRequest {
+message OrderItem {
   string productId = 1;
   int32 quantity = 2;
 }
 
-// Die Daten, die der Service als Antwort zurückgibt
+// Die Anfrage enthält jetzt eine LISTE (repeated) von Artikeln
+message CheckRequest {
+  repeated OrderItem items = 1;
+}
+
+// Die Antwort ist eine einzige Entscheidung für die GESAMTE Liste
 message CheckResponse {
-  bool isAvailable = 1;
+  bool allAvailable = 1;
   string statusMessage = 2;
 }
