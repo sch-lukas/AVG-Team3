@@ -11,7 +11,7 @@ const url = "amqp://avg:avg@rabbitmq:5672";
   await channel.assertQueue("wms.status", { durable: true });
   await channel.bindQueue("wms.commands", "wms.exchange", "wms.commands");
 
-  console.log("🏭 WMS wartet auf Bestellungen...");
+  console.log("WMS wartet auf Bestellungen...");
 
   channel.consume("wms.commands", async (msg) => {
     if (!msg) return;
@@ -24,7 +24,7 @@ const statusList = ["ITEMS_PICKED", "ORDER_PACKED", "ORDER_SHIPPED"];
 for (let s of statusList) {
   await new Promise(r => setTimeout(r, 1000));
   channel.sendToQueue("wms.status", Buffer.from(JSON.stringify({ orderId: order.orderId, status: s })));
-  console.log("📤", s);
+  console.log(s);
 }
 
  channel.ack(msg);
