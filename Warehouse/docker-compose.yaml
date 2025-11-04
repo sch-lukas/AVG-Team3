@@ -1,1 +1,20 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3.13
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: avg
+      RABBITMQ_DEFAULT_PASS: avg
+    restart: always
+
+  wms:
+    build: .
+    container_name: wms
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBIT_URL: amqp://avg:avg@rabbitmq:5672
+    restart: always
 
