@@ -17,7 +17,7 @@ const url = "amqp://avg:avg@rabbitmq:5672";
     if (!msg) return;
 
 const order = JSON.parse(msg.content.toString());
-console.log("📦 Neue Bestellung:", order.orderId);
+console.log("Neue Bestellung:", order.orderId);
 
 const statusList = ["ITEMS_PICKED", "ORDER_PACKED", "ORDER_SHIPPED"];
 
@@ -31,7 +31,7 @@ for (let s of statusList) {
   });
 
   process.on("SIGINT", () => {
-  console.log("🛑 Stoppe WMS...");
+  console.log("Stoppe WMS...");
   net.close();
   process.exit();
   });
