@@ -13,13 +13,20 @@ message OrderItem {
   int32 quantity = 2;
 }
 
-// Die Anfrage enthält jetzt eine LISTE (repeated) von Artikeln
+// Die Anfrage enthält eine LISTE von Artikeln
 message CheckRequest {
   repeated OrderItem items = 1;
 }
 
-// Die Antwort ist eine einzige Entscheidung für die GESAMTE Liste
+// Ein Status-Objekt für EINEN Artikel
+message ItemStatus {
+  string productId = 1;
+  bool isAvailable = 2;
+  string statusMessage = 3;
+  int32 remainingStock = 4;
+}
+
+// Die Antwort ist eine LISTE von Status-Objekten
 message CheckResponse {
-  bool allAvailable = 1;
-  string statusMessage = 2;
+  repeated ItemStatus itemStatuses = 1;
 }

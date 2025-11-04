@@ -2,10 +2,17 @@ import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import path from 'path';
 
-// 1. Pfad zur .proto-Datei definieren
+// MOCK-DATENBANK
+let inventoryStock: { [key: string]: number } = {
+  "P-0001": 10,   // 10 Stück auf Lager
+  "P-0002": 20,   // 20 Stück auf Lager
+  "P-0003": 30    // 30 Stück auf Lager 
+};
+
+// Pfad zur .proto-Datei definieren
 const PROTO_PATH = path.join(__dirname, '../../shared/inventory.proto');
 
-// 2. Proto-Datei laden
+// Proto-Datei laden
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
     keepCase: true,
     longs: String,
@@ -15,33 +22,54 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 });
 const inventoryProto: any = grpc.loadPackageDefinition(packageDefinition).inventory;
 
-// 3. Die eigentliche Logik für die "CheckAvailability"-Funktion
+// Die eigentliche Logik für die "CheckAvailability"-Funktion
 const checkAvailability = (call: any, callback: any) => {
     const { items } = call.request;
     console.log(`[Inventory Service] Prüfe Verfügbarkeit für ${items.length} Artikel...`);
 
-    let allGood = true;
-
+    const responseStatuses: any[] = []; // Array für die ItemStatus-Objekte
+    
+    // --- Wir gehen die Bestellung EINMAL durch ---
     for (const item of items) {
-        console.log(`[Inventory Service] -> Prüfe ${item.quantity}x ${item.productId}...`);
+        const currentStock = inventoryStock[item.productId] || 0; // Hole Bestand
 
-        if (item.productId === 'P-FAIL') {
-            allGood = false;
-            console.log(`[Inventory Service] -> FEHLER: Produkt ${item.productId} ist NICHT verfügbar.`);
-            break;
+        if (currentStock >= item.quantity) {
+            // GENUG AUF LAGER: Wir buchen ab!
+            inventoryStock[item.productId] -= item.quantity; // Bestand reduzieren
+            const newStock = inventoryStock[item.productId];
+
+            console.log(`[Inventory Service] -> OK: ${item.quantity}x ${item.productId} reserviert. Neuer Bestand: ${newStock}`);
+            
+            // Füge Erfolgs-Status zur Antwortliste hinzu
+            responseStatuses.push({
+                productId: item.productId,
+                isAvailable: true,
+                statusMessage: 'Product reserved',
+                remainingStock: newStock
+            });
+
+        } else {
+            // NICHT GENUG AUF LAGER: Wir buchen NICHTS ab
+            console.log(`[Inventory Service] -> FEHLER: ${item.productId} nicht verfügbar. Verfügbar: ${currentStock}, Benötigt: ${item.quantity}`);
+            
+            // Füge Fehler-Status zur Antwortliste hinzu
+            responseStatuses.push({
+                productId: item.productId,
+                isAvailable: false,
+                statusMessage: `Not enough stock. Available: ${currentStock}, Requested: ${item.quantity}`,
+                remainingStock: currentStock
+            });
         }
     }
 
-    if (allGood) {
-        console.log('[Inventory Service] Alle Produkte sind verfügbar.');
-        callback(null, { allAvailable: true, statusMessage: 'All products available and reserved' });
-    } else {
-        console.log('[Inventory Service] Mindestens ein Produkt ist nicht verfügbar.');
-        callback(null, { allAvailable: false, statusMessage: 'At least one product is not in stock' });
-    }
+    // --- Schicke die komplette Status-Liste als Antwort zurück ---
+    console.log('[Inventory Service] Prüfung abgeschlossen, sende Status-Liste.');
+    
+    // Die Antwort ist jetzt das Objekt, das die Liste enthält
+    callback(null, { itemStatuses: responseStatuses });
 };
 
-// 4. Den gRPC-Server erstellen und starten
+// Den gRPC-Server erstellen und starten
 const server = new grpc.Server();
 
 // Registriere unseren Service und seine Implementierung
