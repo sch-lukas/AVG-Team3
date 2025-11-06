@@ -21,17 +21,20 @@ console.log("Neue Bestellung:", order.orderId);
 
 const statusList = ["ITEMS_PICKED", "ORDER_PACKED", "ORDER_SHIPPED"];
 
-for (let s of statusList) {
-  await new Promise(r => setTimeout(r, 1000));
-  channel.sendToQueue("wms.status", Buffer.from(JSON.stringify({ orderId: order.orderId, status: s })));
-  console.log(s);
+for (let status of statusList) {
+  await new Promise(done => setTimeout(done, 1000));
+  const msg = { orderId: order.orderId, status };
+  channel.sendToQueue("wms.status", Buffer.from(JSON.stringify(msg)), { persistent: true });
+
+  console.log("Status gesendet:", msg);
 }
+
 
  channel.ack(msg);
   });
 
   process.on("SIGINT", () => {
-  console.log("Stoppe WMS...");
+  console.log("Stoppe WMS");
   net.close();
   process.exit();
   });
