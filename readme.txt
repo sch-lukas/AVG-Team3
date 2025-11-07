@@ -10,7 +10,7 @@ pnpm dev
 Inbetriebnahme Warehouse service:
 Terminal im Projektverzeichnis: 
 cd .\Warehouse\
-docker compose up rabbitmq
+docker compose up rabbitmq // bis Server startup complete
 docker compose up wms
 
 
