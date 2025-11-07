@@ -7,9 +7,9 @@ pnpm add amqplib
 pnpm add -D @types/amqplib
 pnpm dev
 
-Inbetriebnahme WMS service:
+Inbetriebnahme Warehouse service:
 Terminal im Projektverzeichnis: 
-cd .\WMS\
+cd .\Warehouse\
 docker compose up rabbitmq
 docker compose up wms
 
