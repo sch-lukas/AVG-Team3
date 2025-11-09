@@ -1,7 +1,7 @@
 import amqp from "amqplib";
 
 const RABBIT_URL = "amqp://avg:avg@rabbitmq:5672";
-const LOG_API = "https://abcd1234.mock.pstmn.io/logs";
+const LOG_API = "kommt noch";
 
 (async () => {
   const connection = await amqp.connect(RABBIT_URL);
