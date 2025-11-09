@@ -17,8 +17,16 @@ namespace PaymentAPI.Controllers
         [HttpPost(Name = "Payment Status")]
         public Rückmeldung Post(Payment payment)
         {
-            if (String.IsNullOrWhiteSpace(payment.orderID)) throw new ArgumentNullException("Fehler im OrderID!");
-            else return new Rückmeldung(payment.orderID, payment.totalAmount > 200);
+            if (String.IsNullOrWhiteSpace(payment.orderId))
+            {
+                _logger.LogWarning("Received payment with missing orderId.", payment);
+                throw new ArgumentNullException("Fehler im OrderID!");
+            }
+            else
+            {
+            _logger.LogInformation($"Processed {payment.paymentMethod} payment for OrderId: {payment.orderId}. Amount: {payment.totalAmount}.");
+            return new Rückmeldung(payment.orderId, payment.totalAmount > 200);
+            } 
         }
 
     }
