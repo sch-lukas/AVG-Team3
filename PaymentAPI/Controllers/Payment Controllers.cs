@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PaymentAPI;
 
 namespace PaymentAPI.Controllers
 {
@@ -31,3 +32,37 @@ namespace PaymentAPI.Controllers
 
     }
 }
+public interface IMessageDispatcher
+{
+    void Message(Payment payment);
+}
+public class HttpLogDispatcher : IMessageDispatcher
+{
+    private readonly HttpClient _client;
+    private readonly ILogger<HttpLogDispatcher> _logger;
+
+    public HttpLogDispatcher(HttpClient client, ILogger<HttpLogDispatcher> logger)
+    {
+        _client = client;
+        _logger = logger;
+    }
+
+    public async void Message(Payment payment)
+    {
+        var logEntry = new
+        {
+            Service = "PaymentAPI",
+            orderId = payment.orderId,
+            paymentMethod = payment.paymentMethod,
+            amount = payment.totalAmount,
+            paymentStatus = payment.totalAmount>200 ? "Payment succesful" : "Payment failed",
+            timestamp = DateTime.UtcNow
+        };
+
+        var response = await _client.PostAsJsonAsync("/central-log", logEntry);
+
+        _logger.LogInformation($"Sent payment log. Status: {response.StatusCode}");
+    }
+
+}
+
