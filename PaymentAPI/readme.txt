@@ -18,3 +18,5 @@ return forecast; }) .WithName("GetWeatherForecast"); app.Run();
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary) { 
 
 public int TemperatureF => 32 + (int)(TemperatureC / 0.5556); }"
+
+Wichtig: NET 9.0.306 erforderlich

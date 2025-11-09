@@ -1,0 +1,29 @@
+[
+  {
+    "ContainingType": "PaymentAPI.Controllers.PaymentServiceController",
+    "Method": "Post",
+    "RelativePath": "PaymentService",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "payment",
+        "Type": "PaymentAPI.Payment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PaymentAPI.R\u00FCckmeldung",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "Payment Status"
+  }
+]

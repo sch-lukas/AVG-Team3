@@ -25,7 +25,6 @@ C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net9.0\stat
 C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net9.0\PaymentAPI.csproj.Up2Date
 C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net9.0\PaymentAPI.dll
 C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net9.0\refint\PaymentAPI.dll
