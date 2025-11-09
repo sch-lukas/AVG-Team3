@@ -5,13 +5,13 @@
 
         public string orderId { get; set;  }
 
-        public bool zahlungErfolgreich { get; set; }
+        public bool paymentStatus { get; set; }
 
-        public Rückmeldung(string orderid, bool zahlungerfolgreich) 
+        public Rückmeldung(string orderid, bool paymentstatus) 
         
         {
             orderId = orderid;
-            zahlungErfolgreich = zahlungerfolgreich;
+            paymentStatus = paymentstatus;
         }
     }
 }
