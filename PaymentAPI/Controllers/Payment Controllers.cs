@@ -5,14 +5,16 @@ namespace PaymentAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+
     public class PaymentServiceController : ControllerBase
     {
 
         private readonly ILogger<PaymentServiceController> _logger;
-
-        public PaymentServiceController(ILogger<PaymentServiceController> logger)
+        private readonly IMessageDispatcher _messageDispatcher;
+        public PaymentServiceController(ILogger<PaymentServiceController> logger, IMessageDispatcher messageDispatcher)
         {
             _logger = logger;
+            _messageDispatcher = messageDispatcher;
         }
 
         [HttpPost(Name = "Payment Status")]
