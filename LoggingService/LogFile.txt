@@ -80,3 +80,13 @@
 [2025-11-10T14:34:19.726Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
 [2025-11-10T14:34:20.139Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
 [2025-11-10T14:34:20.151Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-10T17:11:29.038Z] [Inventory Service] gRPC-Server läuft auf Port 50051
+[2025-11-10T17:13:19.339Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T17:13:19.364Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 8
+[2025-11-10T17:13:19.364Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T17:13:19.365Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 19
+[2025-11-10T17:13:19.368Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-10T17:13:19.568Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-10T17:13:19.574Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-10T17:13:19.710Z] [OMS] [ORD-2025-10-16-7891] ✓ Published
+[2025-11-10T17:13:19.711Z] [OMS] [ORD-2025-10-16-7891] ✅ Bestellung erfolgreich verarbeitet (409ms)

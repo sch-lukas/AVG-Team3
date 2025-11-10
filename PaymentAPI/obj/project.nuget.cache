@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DI8AE4QaMwM=",
+  "dgSpecHash": "AAA0QyOhq90=",
   "success": true,
-  "projectFilePath": "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
+  "projectFilePath": "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lukas\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.10\\microsoft.aspnetcore.openapi.8.0.10.nupkg.sha512",
     "C:\\Users\\lukas\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
