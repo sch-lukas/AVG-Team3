@@ -17,18 +17,19 @@ namespace PaymentAPI.Controllers
             _messageDispatcher = messageDispatcher;
         }
 
-        [HttpPost(Name = "Payment Status")]
+        [HttpPost(Name = "Payment Processing")]
         public Rückmeldung Post(Payment payment)
         {
             if (String.IsNullOrWhiteSpace(payment.orderId))
             {
                 _logger.LogWarning("Received payment with missing orderId.", payment);
-                throw new ArgumentNullException("Fehler im OrderID!");
+                throw new ArgumentNullException(nameof(payment.orderId), "Incorrect OrderId!");
             }
             else
             {
-            _logger.LogInformation($"Processed {payment.paymentMethod} payment for OrderId: {payment.orderId}. Amount: {payment.totalAmount}.");
-            return new Rückmeldung(payment.orderId, payment.totalAmount > 200);
+                _logger.LogInformation($"Processed {payment.paymentMethod} payment for OrderId: {payment.orderId}. Amount: {payment.totalAmount}.");
+                _messageDispatcher.Message(payment);
+                return new Rückmeldung(payment.orderId, payment.totalAmount > 200);
             } 
         }
 
@@ -51,20 +52,27 @@ public class HttpLogDispatcher : IMessageDispatcher
 
     public async void Message(Payment payment)
     {
-        var logEntry = new
+        try {
+            var logEntry = new
+            {
+                Service = "PaymentAPI",
+                orderId = payment.orderId,
+                paymentMethod = payment.paymentMethod,
+                amount = payment.totalAmount,
+                paymentStatus = payment.totalAmount > 200 ? "Payment succesful" : "Payment failed",
+                timestamp = DateTime.UtcNow
+            };
+
+            var response = await _client.PostAsJsonAsync("/central-log", logEntry);
+
+            _logger.LogInformation($"Sent payment log. Status: {response.StatusCode}");
+        }
+        catch(Exception ex )
         {
-            Service = "PaymentAPI",
-            orderId = payment.orderId,
-            paymentMethod = payment.paymentMethod,
-            amount = payment.totalAmount,
-            paymentStatus = payment.totalAmount>200 ? "Payment succesful" : "Payment failed",
-            timestamp = DateTime.UtcNow
-        };
 
-        var response = await _client.PostAsJsonAsync("/central-log", logEntry);
-
-        _logger.LogInformation($"Sent payment log. Status: {response.StatusCode}");
-    }
+            _logger.LogError(ex, $"Failed to dispatch payment log for orderId {payment.orderId}", payment.orderId);
+        }
+        }
 
 }
 
