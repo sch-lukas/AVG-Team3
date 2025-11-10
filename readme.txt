@@ -1,11 +1,19 @@
-Inbetriebnahme OMS/Orchestrator service:
+Terminal im Projektverzeichnis:
 
-Terminal im Projektverzeichnis: 
+Inbetriebnahme OMS/Orchestrator service:
 cd .\OMS\
 pnpm i 
 pnpm add amqplib
 pnpm add -D @types/amqplib
+pnpm add @grpc/grpc-js @grpc/proto-loader
+pnpm add -D @types/node
 pnpm dev
+
+Inbetriebnahme Logging service:
+cd .\LoggingService\
+pnpm install
+pnpm dev
+
 
 Inbetriebnahme Warehouse service:
 ## Voraussetzungen
@@ -26,4 +34,5 @@ docker compose up wms
 // WMS wartet auf Bestellungen...
 
 
+Zahlungsmethoden: 
 
