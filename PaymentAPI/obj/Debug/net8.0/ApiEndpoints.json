@@ -24,6 +24,6 @@
         "StatusCode": 200
       }
     ],
-    "EndpointName": "Payment Status"
+    "EndpointName": "Payment Processing"
   }
 ]
