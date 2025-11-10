@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PaymentAPI;
+using System.Text.Json;
 
 namespace PaymentAPI.Controllers
 {
@@ -100,17 +101,10 @@ namespace PaymentAPI.Controllers
         {
             try
             {
-                var logEntry = new
-                {
-                    Service = "PaymentAPI",
-                    orderId = payment.orderId,
-                    paymentMethod = payment.paymentMethod,
-                    amount = payment.totalAmount,
-                    paymentStatus = payment.totalAmount > 200 ? "Payment successful" : "Payment failed",
-                    timestamp = DateTime.UtcNow
-                };
+                var logEntry = new { Message = $"Service: PaymentAPI, OrderId: {payment.orderId}, PaymentMethod: {payment.paymentMethod}, TotalAmount: {payment.totalAmount}, PaymentStatus: {((payment.totalAmount > 200) ? "Payment successful" : "Payment failed")}, at: {DateTime.UtcNow}" };
 
-                var response = await _client.PostAsJsonAsync("/log", logEntry);
+                var options = new JsonSerializerOptions { PropertyNamingPolicy = null };
+                var response = await _client.PostAsJsonAsync("/log", logEntry, options);
 
                 _logger.LogInformation($"Sent payment log. Status: {response.StatusCode}");
             }

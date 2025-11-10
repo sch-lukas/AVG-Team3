@@ -9,11 +9,21 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PaymentAPI
 build_property.RootNamespace = PaymentAPI
+<<<<<<< HEAD
 build_property.ProjectDir = C:\software-engineering\AVG\AVG-Team3\PaymentAPI\
+=======
+build_property.ProjectDir = C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\
+>>>>>>> eb782dccd3b3c6e0596cfd70beaf28d1b2078533
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+<<<<<<< HEAD
 build_property.MSBuildProjectDirectory = C:\software-engineering\AVG\AVG-Team3\PaymentAPI
+=======
+build_property.MSBuildProjectDirectory = C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI
+>>>>>>> eb782dccd3b3c6e0596cfd70beaf28d1b2078533
 build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 

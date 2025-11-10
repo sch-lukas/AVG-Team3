@@ -15,6 +15,7 @@ builder.Services.AddHttpClient<IMessageDispatcher, HttpLogDispatcher>(client =>
     client.BaseAddress = new Uri("http://localhost:7070/log");
 });
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
