@@ -469,19 +469,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aaron\\.nuget\\packages\\": {}
+    "C:\\Users\\tdino\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\avg\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
+      "projectUniqueName": "C:\\Users\\tdino\\source\\repos\\sch-lukas\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
       "projectName": "PaymentAPI",
-      "projectPath": "C:\\avg\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
-      "packagesPath": "C:\\Users\\aaron\\.nuget\\packages\\",
-      "outputPath": "C:\\avg\\AVG-Team3\\PaymentAPI\\obj\\",
+      "projectPath": "C:\\Users\\tdino\\source\\repos\\sch-lukas\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
+      "packagesPath": "C:\\Users\\tdino\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tdino\\source\\repos\\sch-lukas\\AVG-Team3\\PaymentAPI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\aaron\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\tdino\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -504,7 +510,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -538,7 +545,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
