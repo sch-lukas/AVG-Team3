@@ -63,7 +63,7 @@ public class HttpLogDispatcher : IMessageDispatcher
                 timestamp = DateTime.UtcNow
             };
 
-            var response = await _client.PostAsJsonAsync("/central-log", logEntry);
+            var response = await _client.PostAsJsonAsync("/log", logEntry);
 
             _logger.LogInformation($"Sent payment log. Status: {response.StatusCode}");
         }
