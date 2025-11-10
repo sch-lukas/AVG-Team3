@@ -101,7 +101,7 @@ namespace PaymentAPI.Controllers
         {
             try
             {
-                var logEntry = new { Message = $"[PaymentAPI] [{payment.orderId}] PaymentMethod: {payment.paymentMethod}, TotalAmount: {payment.totalAmount}, PaymentStatus: {((payment.totalAmount > 200) ? "Payment successful" : "Payment failed")}, at: {DateTime.UtcNow}" };
+                var logEntry = new { Message = $"[PaymentAPI] [{payment.orderId}] [{DateTime.UtcNow}] -> PaymentMethod: {payment.paymentMethod}, TotalAmount: {payment.totalAmount}, Status: {((payment.totalAmount > 200) ? "Payment successful" : "Payment failed")}" };
 
                 var options = new JsonSerializerOptions { PropertyNamingPolicy = null };
                 var response = await _client.PostAsJsonAsync("/log", logEntry, options);
