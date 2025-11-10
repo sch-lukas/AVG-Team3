@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {}
+    "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {}
   },
   "projects": {
-    "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {
+    "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
+        "projectUniqueName": "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
         "projectName": "PaymentAPI",
-        "projectPath": "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
+        "projectPath": "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
         "packagesPath": "C:\\Users\\lukas\\.nuget\\packages\\",
-        "outputPath": "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\obj\\",
+        "outputPath": "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lukas\\AppData\\Roaming\\NuGet\\NuGet.Config",
