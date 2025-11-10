@@ -8,3 +8,7 @@ items: OrderItem[];
 totalAmount: number;
 shippingAddress: Address;
 };
+export type PaymentResponse = {
+  orderId: string;
+  paymentStatus: "approved" | "declined";
+};

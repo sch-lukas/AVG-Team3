@@ -22,9 +22,18 @@ export async function charge(
     throw new Error(`Payment HTTP ${resp.status}`);
   }
 
-  const data: PaymentResponse = await resp.json();
-  console.log(`[${orderId}] ← Payment:`, data);
+  const raw = await resp.json() as any;
 
+  // ✅ Normalize boolean -> "approved"/"declined"
+  const data: PaymentResponse = {
+    orderId: raw.orderId ?? orderId,
+    paymentStatus:
+      raw.paymentStatus === true ? "approved" :
+      raw.paymentStatus === false ? "declined" :
+      (raw.paymentStatus ?? "").toLowerCase(), // falls Service irgendwann String sendet
+  };
+
+  console.log(`[${orderId}] ← Payment:`, data);
   remoteLog(`[OMS] [${orderId}] ← Payment: ${JSON.stringify(data)}`);
 
   return data;
