@@ -2,6 +2,24 @@ import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import path from 'path';
 
+// Die URL des Logging-Servers
+const LOGGING_SERVICE_URL = 'http://localhost:7070/log';
+
+// Sendet eine Log-Nachricht an den zentralen Logging-Service.
+const logToService = (message: string) => {
+  fetch(LOGGING_SERVICE_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ Message: message }),
+  })
+  .catch(err => {
+
+    console.error(`[InventoryService] Konnte nicht an LoggingService senden: ${err.message}`);
+  });
+};
+
 // MOCK-DATENBANK
 let inventoryStock: { [key: string]: number } = {
   "P-0001": 10,   // 10 Stück auf Lager
@@ -25,7 +43,7 @@ const inventoryProto: any = grpc.loadPackageDefinition(packageDefinition).invent
 // Die eigentliche Logik für die "CheckAvailability"-Funktion
 const checkAvailability = (call: any, callback: any) => {
     const { items } = call.request;
-    console.log(`[Inventory Service] Prüfe Verfügbarkeit für ${items.length} Artikel...`);
+    (`[Inventory Service] Prüfe Verfügbarkeit für ${items.length} Artikel...`);
 
     const responseStatuses: any[] = []; // Array für die ItemStatus-Objekte
     
@@ -38,7 +56,7 @@ const checkAvailability = (call: any, callback: any) => {
             inventoryStock[item.productId] -= item.quantity; // Bestand reduzieren
             const newStock = inventoryStock[item.productId];
 
-            console.log(`[Inventory Service] -> OK: ${item.quantity}x ${item.productId} reserviert. Neuer Bestand: ${newStock}`);
+            logToService(`[Inventory Service] -> OK: ${item.quantity}x ${item.productId} reserviert. Neuer Bestand: ${newStock}`);
             
             // Füge Erfolgs-Status zur Antwortliste hinzu
             responseStatuses.push({
@@ -50,7 +68,7 @@ const checkAvailability = (call: any, callback: any) => {
 
         } else {
             // NICHT GENUG AUF LAGER: Wir buchen NICHTS ab
-            console.log(`[Inventory Service] -> FEHLER: ${item.productId} nicht verfügbar. Verfügbar: ${currentStock}, Benötigt: ${item.quantity}`);
+            logToService(`[Inventory Service] -> FEHLER: ${item.productId} nicht verfügbar. Verfügbar: ${currentStock}, Benötigt: ${item.quantity}`);
             
             // Füge Fehler-Status zur Antwortliste hinzu
             responseStatuses.push({
@@ -63,7 +81,7 @@ const checkAvailability = (call: any, callback: any) => {
     }
 
     // --- Schicke die komplette Status-Liste als Antwort zurück ---
-    console.log('[Inventory Service] Prüfung abgeschlossen, sende Status-Liste.');
+    logToService('[Inventory Service] Prüfung abgeschlossen, sende Status-Liste.');
     
     // Die Antwort ist jetzt das Objekt, das die Liste enthält
     callback(null, { itemStatuses: responseStatuses });
@@ -81,5 +99,5 @@ server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), (err,
         console.error(err);
         return;
     }
-    console.log(`[Inventory Service] gRPC-Server läuft auf Port ${port}`);
+    logToService(`[Inventory Service] gRPC-Server läuft auf Port ${port}`);
 });
