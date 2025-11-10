@@ -26,3 +26,5 @@ Thumbs.db
 .idea/
 /PaymentAPI/.vs
 /.vs
+/PaymentAPI/bin/
+/PaymentAPI/obj/

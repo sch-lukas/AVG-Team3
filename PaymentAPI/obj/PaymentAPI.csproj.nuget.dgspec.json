@@ -1,48 +1,27 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\avg\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {}
+    "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {}
   },
   "projects": {
-    "C:\\avg\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {
+    "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\avg\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
+        "projectUniqueName": "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
         "projectName": "PaymentAPI",
-        "projectPath": "C:\\avg\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
-        "packagesPath": "C:\\Users\\aaron\\.nuget\\packages\\",
-        "outputPath": "C:\\avg\\AVG-Team3\\PaymentAPI\\obj\\",
-=======
-    "C:\\Users\\tdino\\source\\repos\\sch-lukas\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\tdino\\source\\repos\\sch-lukas\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\tdino\\source\\repos\\sch-lukas\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
-        "projectName": "PaymentAPI",
-        "projectPath": "C:\\Users\\tdino\\source\\repos\\sch-lukas\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
-        "packagesPath": "C:\\Users\\tdino\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tdino\\source\\repos\\sch-lukas\\AVG-Team3\\PaymentAPI\\obj\\",
->>>>>>> 0f90203466a90ff840a8668a8676ecbacf548ff2
+        "projectPath": "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
+        "packagesPath": "C:\\Users\\lukas\\.nuget\\packages\\",
+        "outputPath": "C:\\software-engineering\\AVG-Team3\\PaymentAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-<<<<<<< HEAD
-          "C:\\Users\\aaron\\AppData\\Roaming\\NuGet\\NuGet.Config"
-=======
-          "C:\\Users\\tdino\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\lukas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
->>>>>>> 0f90203466a90ff840a8668a8676ecbacf548ff2
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,8 +39,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -95,11 +73,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.415/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
->>>>>>> 0f90203466a90ff840a8668a8676ecbacf548ff2
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
