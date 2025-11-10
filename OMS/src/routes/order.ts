@@ -17,7 +17,7 @@ function isOrder(x: any): x is Order {
 
 ordersRouter.post("/process-order", async (req, res) => {
   const order = req.body as Order;
-  const orderId = order.orderId;
+  const orderId = order?.orderId || "unknown";
   const started = Date.now();
 
   if (!isOrder(order)) return res.status(400).json({ status: "validation_error" });
@@ -25,14 +25,13 @@ ordersRouter.post("/process-order", async (req, res) => {
   console.log(`[${orderId}] → Neue Bestellung empfangen`);
   remoteLog(`[OMS] [${orderId}] → Neue Bestellung empfangen`);
 
-  // 1) INVENTORY
+  // 1) INVENTORY → Array der Item-Statuses
   const availability = await checkInventory(order.items, orderId);
-  const allInStock = availability.every(x => x.isAvailable);
+  const allInStock = availability.every(x => x.isAvailable === true);
 
   if (!allInStock) {
     console.log(`[${orderId}] ✖ Bestellung abgebrochen (Inventar nicht ausreichend)`);
     remoteLog(`[OMS] [${orderId}] ✖ Bestellung abgebrochen (Inventar nicht ausreichend)`);
-    
     return res.status(409).json({ status: "rejected", reason: "inventory", availability });
   }
 
@@ -44,7 +43,7 @@ ordersRouter.post("/process-order", async (req, res) => {
     return res.status(402).json({ status: "failed", step: "payment", payment });
   }
 
-  // 3) RABBITMQ → gesamte Order
+  // 3) RABBITMQ
   await publishOrder(order, orderId);
 
   console.log(`[${orderId}] ✅ Bestellung erfolgreich verarbeitet (${Date.now() - started}ms)`);

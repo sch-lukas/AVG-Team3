@@ -5,12 +5,21 @@ import { fileURLToPath } from "url";
 import { INVENTORY_ADDR } from "../config";
 import { OrderItem } from "../types";
 
-// ✅ ESM __dirname Fix
+// ESM-kompatibles __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Pfad zur .proto Datei
-const PROTO_PATH = path.join(__dirname, "../../../shared/inventory.proto");
+// Proto liegt bei AVG-Team3/shared/inventory.proto
+const PROTO_PATH = path.resolve(__dirname, "../../../shared/inventory.proto");
+
+type ItemStatus = {
+  productId: string;
+  isAvailable: boolean;
+  statusMessage: string;
+  remainingStock: number;
+};
+
+
 
 // Proto laden
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
@@ -22,16 +31,14 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 });
 const inventoryPkg: any = grpc.loadPackageDefinition(packageDefinition).inventory;
 
-// gRPC Client erzeugen
+// gRPC Client
 const client = new inventoryPkg.InventoryService(
-  INVENTORY_ADDR,
+  INVENTORY_ADDR, // z.B. "localhost:50051"
   grpc.credentials.createInsecure()
 );
 
-// =============================
-// checkInventory(items[], orderId) → boolean
-// =============================
-export async function checkInventory(items: OrderItem[], orderId: string): Promise<boolean> {
+// Jetzt: items[] -> Promise<ItemStatus[]>
+export async function checkInventory(items: OrderItem[], orderId: string): Promise<ItemStatus[]> {
   console.log(`[${orderId}] → Inventory (gRPC) Anfrage: ${items.length} Artikel`);
 
   return new Promise((resolve, reject) => {
@@ -41,17 +48,14 @@ export async function checkInventory(items: OrderItem[], orderId: string): Promi
         return reject(err);
       }
 
-      const list = resp.itemStatuses ?? [];
+      const list: ItemStatus[] = resp?.itemStatuses ?? [];
 
       console.log(`[${orderId}] ← Inventory Antwort:`);
-      list.forEach((x: any) =>
+      list.forEach(x =>
         console.log(`  ${x.productId}: ${x.isAvailable ? "✔ verfügbar" : "❌ nicht verfügbar"} (${x.statusMessage})`)
       );
 
-      const allAvailable = list.every((x: any) => x.isAvailable === true);
-      console.log(`[${orderId}] → Inventory Ergebnis: ${allAvailable ? "OK ✅" : "NICHT OK ❌"}`);
-
-      resolve(allAvailable);
+      resolve(list);
     });
   });
 }
