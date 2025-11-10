@@ -1,8 +1,10 @@
 import amqp from "amqplib";
 import { RABBIT_URL, WMS_EXCHANGE, WMS_ROUTING_KEY } from "../config";
+import { remoteLog } from "../services/remoteLog";
 
 export async function publishOrder(order: object, orderId: string) {
   console.log(`[${orderId}] → RabbitMQ publish`);
+  remoteLog(`[OMS] [${orderId}] → RabbitMQ publish`);
 
   const conn = await amqp.connect(RABBIT_URL);
   const ch = await conn.createChannel();
@@ -16,4 +18,5 @@ export async function publishOrder(order: object, orderId: string) {
   await ch.close();
   await conn.close();
   console.log(`[${orderId}] ✓ Published`);
+  remoteLog(`[OMS] [${orderId}] ✓ Published`);
 }

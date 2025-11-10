@@ -3,6 +3,7 @@ import { Order } from "../types";
 import { checkInventory } from "../services/inventory";
 import { charge } from "../services/payment";
 import { publishOrder } from "../services/rabbit";
+import { remoteLog } from "../services/remoteLog";
 
 export const ordersRouter = Router();
 
@@ -22,6 +23,7 @@ ordersRouter.post("/process-order", async (req, res) => {
   if (!isOrder(order)) return res.status(400).json({ status: "validation_error" });
 
   console.log(`[${orderId}] → Neue Bestellung empfangen`);
+  remoteLog(`[OMS] [${orderId}] → Neue Bestellung empfangen`);
 
   // 1) INVENTORY
   const availability = await checkInventory(order.items, orderId);
@@ -29,6 +31,8 @@ ordersRouter.post("/process-order", async (req, res) => {
 
   if (!allInStock) {
     console.log(`[${orderId}] ✖ Bestellung abgebrochen (Inventar nicht ausreichend)`);
+    remoteLog(`[OMS] [${orderId}] ✖ Bestellung abgebrochen (Inventar nicht ausreichend)`);
+    
     return res.status(409).json({ status: "rejected", reason: "inventory", availability });
   }
 
@@ -36,6 +40,7 @@ ordersRouter.post("/process-order", async (req, res) => {
   const payment = await charge(order.orderId, order.totalAmount, order.paymentMethod);
   if (payment.paymentStatus !== "approved") {
     console.log(`[${orderId}] ✖ Zahlung fehlgeschlagen`);
+    remoteLog(`[OMS] [${orderId}] ✖ Zahlung fehlgeschlagen`);
     return res.status(402).json({ status: "failed", step: "payment", payment });
   }
 
@@ -43,5 +48,6 @@ ordersRouter.post("/process-order", async (req, res) => {
   await publishOrder(order, orderId);
 
   console.log(`[${orderId}] ✅ Bestellung erfolgreich verarbeitet (${Date.now() - started}ms)`);
+  remoteLog(`[OMS] [${orderId}] ✅ Bestellung erfolgreich verarbeitet (${Date.now() - started}ms)`);
   res.json({ status: "ok", orderId });
 });

@@ -1,37 +1,49 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+// __dirname-Ersatz für ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Fester Port
+const PORT = 7070;
+
+// Log-Datei liegt im Projektordner (neben package.json / LogFile.txt)
+const logPath = path.join(__dirname, "..", "LogFile.txt");
+
+// Sicherstellen, dass die Datei existiert
+if (!fs.existsSync(logPath)) {
+  fs.writeFileSync(logPath, "", { encoding: "utf-8" });
+}
 
 const app = express();
 app.use(express.json());
 
-const PORT = 5200; // fest eingestellter Port
+// Minimaler Health-Check
+app.get("/", (_req: Request, res: Response) => {
+  res.json({ service: "LoggingService", status: "ok" });
+});
 
-// Pfad zur Log-Datei
-const logPath = path.join(__dirname, "../Messenger/LogFile.txt");
-
-// Logging Endpoint
-app.post("/log", (req, res) => {
-  const message = req.body?.Message;
-
-  if (!message) {
-    return res.status(400).json({ error: "Missing field: Message" });
+// POST /log  – Body: { "Message": "text" }
+app.post("/log", (req: Request, res: Response) => {
+  const msg = typeof req.body?.Message === "string" ? req.body.Message : "";
+  if (!msg.trim()) {
+    return res.status(400).json({ error: "Body must be { \"Message\": \"...\" }" });
   }
 
-  const timestamp = new Date().toISOString();
-  const entry = `[${timestamp}] ${message}\n`;
-
-  fs.appendFileSync(logPath, entry, { encoding: "utf8" });
-
-  console.log(`[LoggingService] ✔ Log gespeichert: "${message}"`);
-  res.json({ status: "logged" });
+  const line = `[${new Date().toISOString()}] ${msg}\n`;
+  fs.appendFile(logPath, line, (err) => {
+    if (err) {
+      console.error("Append error:", err);
+      return res.status(500).json({ error: "failed to write log" });
+    }
+    return res.status(201).json({ ok: true });
+  });
 });
 
 app.listen(PORT, () => {
-  console.log(`[LoggingService] läuft auf Port ${PORT}`);
-  console.log(`[LoggingService] Schreibpfad: ${logPath}`);
+  console.log(`[LoggingService] Listening on :${PORT}`);
+  console.log(`[LoggingService] Writing to ${logPath}`);
 });
