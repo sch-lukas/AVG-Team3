@@ -25,6 +25,4 @@ Thumbs.db
 .vscode/
 .idea/
 /PaymentAPI/.vs
-/LoggingService
-/OMS/src/services
 /.vs

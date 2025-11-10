@@ -1,0 +1,59 @@
+[2025-11-10T12:41:35.262Z] Test Logeintrag erfolgreich gespeichert
+[2025-11-10T13:11:46.226Z] [Inventory Service] gRPC-Server läuft auf Port 50051
+[2025-11-10T13:13:07.236Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T13:13:07.299Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 8
+[2025-11-10T13:13:07.300Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 19
+[2025-11-10T13:13:07.302Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T13:14:09.519Z] [Inventory Service] gRPC-Server läuft auf Port 50051
+[2025-11-10T13:14:58.747Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T13:14:58.777Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 8
+[2025-11-10T13:14:58.778Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 19
+[2025-11-10T13:14:58.779Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T13:30:11.744Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T13:30:11.759Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 18
+[2025-11-10T13:30:11.760Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 6
+[2025-11-10T13:30:11.760Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T13:30:11.770Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-10T13:30:12.092Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":true}
+[2025-11-10T13:30:12.095Z] [OMS] [ORD-2025-10-16-7891] ✖ Zahlung fehlgeschlagen
+[2025-11-10T13:31:16.711Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T13:31:16.718Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 4
+[2025-11-10T13:31:16.719Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 17
+[2025-11-10T13:31:16.720Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T13:31:16.720Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-10T13:31:16.733Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":false}
+[2025-11-10T13:31:16.736Z] [OMS] [ORD-2025-10-16-7891] ✖ Zahlung fehlgeschlagen
+[2025-11-10T13:35:54.290Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T13:35:54.309Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 16
+[2025-11-10T13:35:54.310Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-10T13:35:54.312Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T13:35:54.313Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 2
+[2025-11-10T13:35:54.326Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":false}
+[2025-11-10T13:35:54.334Z] [OMS] [ORD-2025-10-16-7891] ✖ Zahlung fehlgeschlagen
+[2025-11-10T13:36:27.331Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T13:36:27.339Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 15
+[2025-11-10T13:36:27.339Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 0
+[2025-11-10T13:36:27.341Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T13:36:27.341Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-10T13:36:27.351Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":true}
+[2025-11-10T13:36:27.354Z] [OMS] [ORD-2025-10-16-7891] ✖ Zahlung fehlgeschlagen
+[2025-11-10T13:40:16.862Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T13:40:16.879Z] [Inventory Service] -> FEHLER: P-0001 nicht verfügbar. Verfügbar: 0, Benötigt: 2
+[2025-11-10T13:40:16.879Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 14
+[2025-11-10T13:40:16.880Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T13:40:16.891Z] [OMS] [ORD-2025-10-16-7891] ✖ Bestellung abgebrochen (Inventar nicht ausreichend)
+[2025-11-10T13:40:31.609Z] [Inventory Service] gRPC-Server läuft auf Port 50051
+[2025-11-10T13:40:35.028Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T13:40:35.048Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 8
+[2025-11-10T13:40:35.048Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 19
+[2025-11-10T13:40:35.049Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T13:40:35.052Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-10T13:40:35.065Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":true}
+[2025-11-10T13:40:35.067Z] [OMS] [ORD-2025-10-16-7891] ✖ Zahlung fehlgeschlagen
+[2025-11-10T13:41:13.509Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T13:41:13.548Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 6
+[2025-11-10T13:41:13.549Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 18
+[2025-11-10T13:41:13.549Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T13:41:13.585Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-10T13:41:13.625Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-10T13:41:13.625Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
