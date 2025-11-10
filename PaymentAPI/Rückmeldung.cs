@@ -1,5 +1,8 @@
 ﻿namespace PaymentAPI
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Rückmeldung
     {
 

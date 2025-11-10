@@ -10,7 +10,7 @@
         "tags": [
           "PaymentService"
         ],
-        "operationId": "Payment Status",
+        "operationId": "Payment Processing",
         "requestBody": {
           "content": {
             "application/json": {

@@ -34,6 +34,9 @@ C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net8.0\refi
 C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net8.0\PaymentAPI.pdb
 C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net8.0\PaymentAPI.genruntimeconfig.cache
 C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net8.0\ref\PaymentAPI.dll
+<<<<<<< HEAD
+C:\Users\tdino\source\repos\sch-lukas\AVG-Team3\PaymentAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+=======
 C:\software-engineering\AVG-Team3\PaymentAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\software-engineering\AVG-Team3\PaymentAPI\bin\Debug\net8.0\appsettings.json
 C:\software-engineering\AVG-Team3\PaymentAPI\bin\Debug\net8.0\PaymentAPI.exe
@@ -68,3 +71,4 @@ C:\software-engineering\AVG-Team3\PaymentAPI\obj\Debug\net8.0\refint\PaymentAPI.
 C:\software-engineering\AVG-Team3\PaymentAPI\obj\Debug\net8.0\PaymentAPI.pdb
 C:\software-engineering\AVG-Team3\PaymentAPI\obj\Debug\net8.0\PaymentAPI.genruntimeconfig.cache
 C:\software-engineering\AVG-Team3\PaymentAPI\obj\Debug\net8.0\ref\PaymentAPI.dll
+>>>>>>> 7a6aeb5336caa8b55c938a6b80104cf777eb964d

@@ -10,7 +10,7 @@ builder.Services.AddSwaggerGen();
 // HttpClient for your IMessageDispatcher
 builder.Services.AddHttpClient<IMessageDispatcher, HttpLogDispatcher>(client =>
 {
-    client.BaseAddress = new Uri("url");
+    client.BaseAddress = new Uri("https://localhost:7070/log");
 });
 
 var app = builder.Build();
