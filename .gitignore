@@ -28,5 +28,8 @@ Thumbs.db
 /.vs
 PaymentAPI/obj/Release/
 PaymentAPI/bin/Debug/
+PaymentAPI/bin/Debug/net8.0/
 PaymentAPI/bin/Debug/net8.0/PaymentAPI.dll
-PaymentAPI/bin/Debug/net8.0/PaymentAPI.exe
+PaymentAPI/obj/PaymentAPI.csproj.nuget.dgspec.json
+PaymentAPI/obj/Debug/net8.0/ref/PaymentAPI.dll
+PaymentAPI/obj/Debug/net8.0/refint/PaymentAPI.dll
