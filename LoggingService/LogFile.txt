@@ -57,3 +57,26 @@
 [2025-11-10T13:41:13.585Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
 [2025-11-10T13:41:13.625Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
 [2025-11-10T13:41:13.625Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-10T14:20:34.657Z] [Inventory Service] gRPC-Server läuft auf Port 50051
+[2025-11-10T14:24:27.393Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T14:24:27.458Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 8
+[2025-11-10T14:24:27.464Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 19
+[2025-11-10T14:24:27.469Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T14:24:27.484Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-10T14:24:28.094Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-10T14:24:28.105Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-10T14:29:33.249Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T14:29:33.285Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 6
+[2025-11-10T14:29:33.286Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 18
+[2025-11-10T14:29:33.287Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T14:29:33.320Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-10T14:29:33.361Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-10T14:29:33.361Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-10T14:32:17.934Z] [Inventory Service] gRPC-Server läuft auf Port 50051
+[2025-11-10T14:34:19.659Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-10T14:34:19.711Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 8
+[2025-11-10T14:34:19.712Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 19
+[2025-11-10T14:34:19.714Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-10T14:34:19.726Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-10T14:34:20.139Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-10T14:34:20.151Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
