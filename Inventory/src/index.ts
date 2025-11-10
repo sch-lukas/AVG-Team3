@@ -9,7 +9,7 @@ let inventoryStock: { [key: string]: number } = {
   "P-0003": 30    // 30 Stück auf Lager 
 };
 
-// Pfad zur .proto-Datei definieren
+// Pfad zur .proto-Datei
 const PROTO_PATH = path.join(__dirname, '../../shared/inventory.proto');
 
 // Proto-Datei laden
@@ -22,20 +22,19 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 });
 const inventoryProto: any = grpc.loadPackageDefinition(packageDefinition).inventory;
 
-// Die eigentliche Logik für die "CheckAvailability"-Funktion
+// Die Logik für die "CheckAvailability"-Funktion
 const checkAvailability = (call: any, callback: any) => {
     const { items } = call.request;
     console.log(`[Inventory Service] Prüfe Verfügbarkeit für ${items.length} Artikel...`);
 
-    const responseStatuses: any[] = []; // Array für die ItemStatus-Objekte
+    const responseStatuses: any[] = []; 
     
-    // --- Wir gehen die Bestellung EINMAL durch ---
     for (const item of items) {
         const currentStock = inventoryStock[item.productId] || 0; // Hole Bestand
 
         if (currentStock >= item.quantity) {
             // GENUG AUF LAGER: Wir buchen ab!
-            inventoryStock[item.productId] -= item.quantity; // Bestand reduzieren
+            inventoryStock[item.productId] -= item.quantity;
             const newStock = inventoryStock[item.productId];
 
             console.log(`[Inventory Service] -> OK: ${item.quantity}x ${item.productId} reserviert. Neuer Bestand: ${newStock}`);
