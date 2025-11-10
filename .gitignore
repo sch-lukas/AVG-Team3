@@ -26,3 +26,7 @@ Thumbs.db
 .idea/
 /PaymentAPI/.vs
 /.vs
+PaymentAPI/obj/Release/
+PaymentAPI/bin/Debug/
+PaymentAPI/bin/Debug/net8.0/PaymentAPI.dll
+PaymentAPI/bin/Debug/net8.0/PaymentAPI.exe
