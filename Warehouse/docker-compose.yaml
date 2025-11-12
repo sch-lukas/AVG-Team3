@@ -7,14 +7,10 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: avg
       RABBITMQ_DEFAULT_PASS: avg
-    restart: always
 
   wms:
     build: .
     container_name: wms
-    depends_on:
-      - rabbitmq
     environment:
-      RABBIT_URL: amqp://avg:avg@rabbitmq:5672
-    restart: always
-
+      - RABBIT_URL=amqp://avg:avg@rabbitmq:5672
+      - LOG_SERVER_URL=http://host.docker.internal:7070/log
