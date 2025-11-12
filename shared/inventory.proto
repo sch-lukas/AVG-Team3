@@ -8,6 +8,7 @@ service InventoryService {
   rpc CheckAvailability(CheckRequest) returns (CheckResponse);
 }
 
+// Repräsentiert einen einzelnen Artikel einer Bestellung
 message OrderItem {
   string productId = 1;
   int32 quantity = 2;

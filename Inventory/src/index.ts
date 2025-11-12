@@ -47,7 +47,7 @@ const checkAvailability = (call: any, callback: any) => {
 
     const responseStatuses: any[] = []; // Array für die ItemStatus-Objekte
     
-    // --- Wir gehen die Bestellung EINMAL durch ---
+    // Die Bestellung wird einmal durchgegangen
     for (const item of items) {
         const currentStock = inventoryStock[item.productId] || 0; // Hole Bestand
 
@@ -83,7 +83,7 @@ const checkAvailability = (call: any, callback: any) => {
     // --- Schicke die komplette Status-Liste als Antwort zurück ---
     logToService('[Inventory Service] Prüfung abgeschlossen, sende Status-Liste.');
     
-    // Die Antwort ist jetzt das Objekt, das die Liste enthält
+    // Die Antwort ist das Objekt, das die Liste enthält
     callback(null, { itemStatuses: responseStatuses });
 };
 
