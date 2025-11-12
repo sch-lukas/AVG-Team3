@@ -1,70 +1,79 @@
 import amqp from "amqplib";
 
 const RABBIT_URL = "amqp://avg:avg@rabbitmq:5672";
-const LOG_API = "kommt noch";
+const LOG_SERVER_URL = process.env.LOG_SERVER_URL || "http://host.docker.internal:7070/log";
+
+const EXCHANGE = "wms.orders";
+const QUEUE = "wms.commands";
+const ROUTING_KEY_IN = "order.process";
+const ROUTING_KEY_OUT = "order.status";
 
 (async () => {
-  const connection = await amqp.connect(RABBIT_URL);
-  const channel = await connection.createChannel();
+  try {
+    const conn = await amqp.connect(RABBIT_URL);
+    const ch = await conn.createChannel();
 
-  await channel.assertExchange("wms.exchange", "topic", { durable: true });
-  await channel.assertQueue("wms.commands", { durable: true });
-  await channel.assertQueue("wms.status", { durable: true });
-  await channel.bindQueue("wms.commands", "wms.exchange", "wms.commands");
+    await ch.assertExchange(EXCHANGE, "topic", { durable: true });
+    await ch.assertQueue(QUEUE, { durable: true });
+    await ch.bindQueue(QUEUE, EXCHANGE, ROUTING_KEY_IN);
 
-  console.log("WMS-Service gestartet und wartet auf Bestellungen...");
+    console.log("WMS gestartet. Wartet auf Bestellungen...");
 
-  channel.consume("wms.commands", async (msg) => {
-    if (!msg) return;
+    ch.consume(QUEUE, async (msg) => {
+      if (!msg) return;
+      const start = Date.now();
+      const order = JSON.parse(msg.content.toString());
+      console.log(`Bestellung empfangen: ${order.orderId}`);
 
-    const order = JSON.parse(msg.content.toString());
-
-    if (!order.orderId) {
-      console.warn("Bestellung ohne OrderId empfangen.");
-      return;
-    }
-
-    console.log(`Bestellung empfangen: ${order.orderId}`);
-
-    const statusList = ["ITEMS_PICKED", "ORDER_PACKED", "ORDER_SHIPPED"];
-    const logs: { orderId: string; status: string; source: string }[] = [];
-
-    for (const status of statusList) {
-      await new Promise((r) => setTimeout(r, 1000));
-
-      console.log(`Status: ${status} für OrderId: ${order.orderId}`);
-
-      logs.push({
-        orderId: order.orderId,
-        status,
-        source: "WMS"
+      await fetch(LOG_SERVER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          Message: `[WMS] [${order.orderId}] Bestellung empfangen`,
+          Logs: [{ orderId: order.orderId, status: "RECEIVED", source: "WMS", timestamp: Date.now() }]
+        })
       });
 
-      channel.sendToQueue(
-        "wms.status",
-        Buffer.from(JSON.stringify({ orderId: order.orderId, status })),
-        { persistent: true }
-      );
-    }
+      for (const status of ["ITEMS_PICKED", "ORDER_PACKED", "ORDER_SHIPPED"]) {
+        await new Promise((r) => setTimeout(r, 1000));
+        console.log(`Status: ${status} (${order.orderId})`);
+        await fetch(LOG_SERVER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            Message: `[WMS] [${order.orderId}] ${status}`,
+            Logs: [{ orderId: order.orderId, status, source: "WMS", timestamp: Date.now() }]
+          })
+        });
+      }
 
-    const message = {
-      Message: `WMS: Order ${order.orderId} wurde bearbeitet`,
-      Logs: logs
-    };
+      const end = Date.now();
+      console.log(`[${order.orderId}] Bestellung verarbeitet (${end - start}ms)`);
 
-    await fetch(LOG_API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(message)
+      await fetch(LOG_SERVER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          Message: `[WMS] [${order.orderId}] Bestellung abgeschlossen (${end - start}ms)`,
+          Logs: [{ orderId: order.orderId, status: "COMPLETED", source: "WMS", timestamp: end }]
+        })
+      });
+
+      ch.publish(EXCHANGE, ROUTING_KEY_OUT, Buffer.from(JSON.stringify({
+        orderId: order.orderId,
+        status: "completed",
+        timestamp: end
+      })), { contentType: "application/json", persistent: true });
+
+      ch.ack(msg);
     });
 
-    console.log(`Logs für Order ${order.orderId} gesendet.`);
-    channel.ack(msg);
-  });
-
-  process.on("SIGINT", () => {
-    console.log("WMS-Service wird beendet...");
-    connection.close();
-    process.exit();
-  });
+    process.on("SIGINT", () => {
+      conn.close();
+      process.exit();
+    });
+  } catch (err: any) {
+    console.error("Fehler beim Starten des WMS:", err.message);
+    process.exit(1);
+  }
 })();
