@@ -1,3 +1,4 @@
+// Alle Adressen von den anderen Services
 export const PORT = Number(process.env.PORT ?? 3000);
 export const INVENTORY_ADDR = process.env.INVENTORY_ADDR ?? "localhost:50051"; // gRPC address
 export const PAYMENT_URL = process.env.PAYMENT_URL ?? "http://localhost:5167/PaymentService";
