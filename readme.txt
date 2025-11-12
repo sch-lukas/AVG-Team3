@@ -56,7 +56,7 @@ docker compose up rabbitmq
 
 *Warehouse Service starten:
 
-docker compose up wms
+docker compose up --build wms
 // WMS wartet auf Bestellungen...
 
 
