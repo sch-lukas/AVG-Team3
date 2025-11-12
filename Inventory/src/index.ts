@@ -100,5 +100,5 @@ server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), (err,
         return;
     }
     logToService(`[Inventory Service] gRPC-Server läuft auf Port ${port}`);
-    console.log('[Inventory Service] gRPC-Server läuft auf Port ${port}');
+    console.log(`[Inventory Service] gRPC-Server läuft auf Port ${port}`);
 });
