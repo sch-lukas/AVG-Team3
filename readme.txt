@@ -59,6 +59,20 @@ docker compose up rabbitmq
 docker compose up --build wms
 // WMS wartet auf Bestellungen...
 
+Inbetriebnahme PaymentAPI:
+## Voraussetungen
 
-Zahlungsmethoden: 
+*Net 8.0 erforderlich
+
+## Start
+
+verzeichnis im Terminal öffnen
+
+cd .\PaymentAPI\
+
+"dotnet run" eingeben
+
+## Ergebnis
+
+Now Listening on: http://localhost:5167
 

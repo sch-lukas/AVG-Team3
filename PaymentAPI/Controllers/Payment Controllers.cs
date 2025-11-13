@@ -38,11 +38,13 @@ namespace PaymentAPI.Controllers
         [HttpPost(Name = "Payment Processing")]
         public Rückmeldung Post(Payment payment)
         {
+            //Prüfung ob die OrderId vom Format gültig ist
             if (string.IsNullOrWhiteSpace(payment.orderId))
             {
                 _logger.LogWarning("Received payment with missing orderId.", payment);
                 throw new ArgumentNullException(nameof(payment.orderId), "Incorrect OrderId!");
             }
+            //Im Fall das alles passt wird es geloggt, und ein Rückmeldung Objekt als JSON zurückgegeben
             else
             {
                 _logger.LogInformation(
@@ -61,7 +63,7 @@ namespace PaymentAPI.Controllers
     public interface IMessageDispatcher
     {
         /// <summary>
-        /// Der Dienst zum weiterleiten einer Nachricht.
+        /// Der Dienst zum weiterleiten einer Nachricht (Message).
         /// </summary>
         /// <param name="payment">Die zu versendenden Zahlungsdaten.</param>
         void Message(Payment payment);
@@ -99,6 +101,7 @@ namespace PaymentAPI.Controllers
         /// </exception>
         public async void Message(Payment payment)
         {
+            //try-catch für das Versenden der Message/Log Nachricht an dem LoggingService
             try
             {
                 var logEntry = new { Message = $"[PaymentAPI] [{payment.orderId}] [{DateTime.UtcNow}] -> PaymentMethod: {payment.paymentMethod}, TotalAmount: {payment.totalAmount}, Status: {((payment.totalAmount > 200) ? "Payment successful" : "Payment failed")}" };
