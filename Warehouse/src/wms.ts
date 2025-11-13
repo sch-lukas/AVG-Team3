@@ -1,3 +1,4 @@
+// Importiert die AMQP-Bibliothek, um mit RabbitMQ zu kommunizieren
 import amqp from "amqplib";
 
 // Verbindung zu RabbitMQ herstellen
