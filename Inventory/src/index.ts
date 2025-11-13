@@ -80,7 +80,7 @@ const checkAvailability = (call: any, callback: any) => {
         }
     }
 
-    // --- Schicke die komplette Status-Liste als Antwort zurück ---
+    // Schicke die komplette Status-Liste als Antwort zurück
     logToService('[Inventory Service] Prüfung abgeschlossen, sende Status-Liste.');
     
     // Die Antwort ist das Objekt, das die Liste enthält
