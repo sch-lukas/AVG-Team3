@@ -1,62 +1,61 @@
 @startuml Shop
-' Titel des Diagramms
-title Shop AG - Prozess-Architektur (Kombinierte Version)
+title Team 3
 
-'Skin
 skinparam componentStyle uml2
 skinparam packageStyle rectangle
 
-'
-' == Definition der Komponenten ==
-'
+' ================
+'  PACKAGES
+' ================
 
-' 1. Unsere zentrale Lösung
+package "Client" {
+  actor Kunde as User
+}
+
 package "Order- & Integrations-Plattform (REST)" {
-  component "Order- & Orchestrator-Service" as Orch
+  component "Order-/Orchestrator Service" as ORCH
 }
 
-' 2. Die angebundenen Systeme
-package "Microservice (gRPC)" {
-  component "Inventory Service (IS)" as IS
+package "Backend Services" {
+  component "Inventory Service (gRPC)" as INV
+  component "Payment Service (REST)" as PAY
+  component "Warehouse Service\n(AMQP Consumer)" as WMS
 }
 
-package "Externer Service (REST)" {
-  component "Payment Service (PS)" as PS
+package "Messaging" {
+  queue "RabbitMQ" as MQ
 }
 
-package "Legacy System (MQ)" {
-  component "Warehouse (WMS)" as WMS
+package "Logging" {
+  component "Logging Service\n(HTTP POST)" as LOG
 }
 
-' 3. Infrastruktur-Komponenten
-package "Infrastruktur" {
-   queue "RabbitMQ" as MQ
-   database "Log-File" as Log
-}
+' ================
+'  MAIN PROCESS FLOW
+' ================
 
+User --> ORCH : 1. Bestellung senden (REST /process-order)
 
-'
-' == Definition des Datenflusses ==
-'
+' Inventory
+ORCH --> INV : 2. Bestand prüfen (gRPC)
+INV --> ORCH : 3. Prüfergebnis (Items-Status)
 
-' 1. Bestandsprüfung
-Orch -> IS : 1. Bestand prüfen (gRPC)
-IS .-> Orch : 2. Antwort: Verfügbar (gRPC)
+' Payment
+ORCH --> PAY : 4. Zahlung durchführen (REST)
+PAY --> ORCH : 5. Zahlungsergebnis (orderId, paymentStatus)
 
-' 2. Bezahlung (nach erfolgreicher Prüfung)
-Orch -> PS : 3. Bezahlung durchführen (REST API)
-PS .-> Orch : 4. Antwort: Erfolg (REST API)
+' Publish to MQ
+ORCH --> MQ : 6. Versandauftrag publish (AMQP)
+MQ --> WMS : 7. Versandauftrag empfangen (consume)
 
-' 3. Versandauftrag (nach erfolgreicher Bezahlung)
-Orch -> MQ : 5. Versandauftrag (AMQP Publish)
-MQ --> WMS : 6. Auftrag empfangen (AMQP Consume)
+' ================
+'  LOGGING-FLUSS
+' ================
 
-' 4. Status-Rückmeldung (asynchron)
-
-WMS --> MQ : 7. Status-Update (AMQP Publish)
-MQ .> Orch : 8. Status empfangen (AMQP Consume)
-
-' 5. Logging (passiert bei jedem Schritt)
-Orch .> Log : (loggt alle Schritte)
+' Alle Services schicken Logs an Logging-Service (HTTP POST)
+ORCH --> LOG : Log(Event)
+INV --> LOG : Log(Event)
+PAY --> LOG : Log(Event)
+WMS --> LOG : Log(Event)
 
 @enduml
