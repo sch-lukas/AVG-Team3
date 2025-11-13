@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {}
+    "C:\\avg\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {}
   },
   "projects": {
-    "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {
+    "C:\\avg\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
+        "projectUniqueName": "C:\\avg\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
         "projectName": "PaymentAPI",
-        "projectPath": "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
-        "packagesPath": "C:\\Users\\lukas\\.nuget\\packages\\",
-        "outputPath": "C:\\software-engineering\\AVG\\AVG-Team3\\PaymentAPI\\obj\\",
+        "projectPath": "C:\\avg\\AVG-Team3\\PaymentAPI\\PaymentAPI.csproj",
+        "packagesPath": "C:\\Users\\aaron\\.nuget\\packages\\",
+        "outputPath": "C:\\avg\\AVG-Team3\\PaymentAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lukas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\aaron\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -73,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.416/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

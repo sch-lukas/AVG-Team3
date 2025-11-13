@@ -123,3 +123,111 @@
 [2025-11-12T19:30:03.885Z] [WMS] [ORD-2025-10-16-7891] ORDER_PACKED
 [2025-11-12T19:30:04.891Z] [WMS] [ORD-2025-10-16-7891] ORDER_SHIPPED
 [2025-11-12T19:30:04.900Z] [WMS] [ORD-2025-10-16-7891] Bestellung abgeschlossen (3027ms)
+[2025-11-13T13:07:21.014Z] [Inventory Service] gRPC-Server läuft auf Port 50051
+[2025-11-13T13:19:18.208Z] [Inventory Service] -> OK: 5x P-0001 reserviert. Neuer Bestand: 5
+[2025-11-13T13:19:18.209Z] [Inventory Service] -> OK: 10x P-0002 reserviert. Neuer Bestand: 10
+[2025-11-13T13:19:18.210Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-13T13:19:23.042Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 3
+[2025-11-13T13:19:23.043Z] [Inventory Service] -> FEHLER: P-0003 nicht verfügbar. Verfügbar: 30, Benötigt: 99
+[2025-11-13T13:19:23.045Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-13T13:21:46.629Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-13T13:21:46.667Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 1
+[2025-11-13T13:21:46.669Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 9
+[2025-11-13T13:21:46.670Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-13T13:21:46.699Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-13T13:21:47.250Z] [PaymentAPI] [ORD-2025-10-16-7891] [13.11.2025 13:21:47] -> PaymentMethod: card, TotalAmount: 700, Status: Payment successful
+[2025-11-13T13:21:47.253Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-13T13:21:47.263Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-13T13:21:47.434Z] [OMS] [ORD-2025-10-16-7891] ✓ Published
+[2025-11-13T13:21:47.440Z] [OMS] [ORD-2025-10-16-7891] ✅ Bestellung erfolgreich verarbeitet (885ms)
+[2025-11-13T13:21:47.631Z] [WMS] [ORD-2025-10-16-7891] Bestellung empfangen
+[2025-11-13T13:21:48.672Z] [WMS] [ORD-2025-10-16-7891] ITEMS_PICKED
+[2025-11-13T13:21:49.700Z] [WMS] [ORD-2025-10-16-7891] ORDER_PACKED
+[2025-11-13T13:21:50.742Z] [WMS] [ORD-2025-10-16-7891] ORDER_SHIPPED
+[2025-11-13T13:21:50.763Z] [WMS] [ORD-2025-10-16-7891] Bestellung abgeschlossen (3278ms)
+[2025-11-13T13:22:40.932Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-13T13:22:40.938Z] [Inventory Service] -> FEHLER: P-0001 nicht verfügbar. Verfügbar: 1, Benötigt: 2
+[2025-11-13T13:22:40.941Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 8
+[2025-11-13T13:22:40.942Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-13T13:22:40.946Z] [OMS] [ORD-2025-10-16-7891] ✖ Bestellung abgebrochen (Inventar nicht ausreichend)
+[2025-11-13T13:23:19.218Z] [Inventory Service] gRPC-Server läuft auf Port 50051
+[2025-11-13T13:23:22.898Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-13T13:23:22.934Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 8
+[2025-11-13T13:23:22.936Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 19
+[2025-11-13T13:23:22.937Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-13T13:23:22.938Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-13T13:23:22.961Z] [PaymentAPI] [ORD-2025-10-16-7891] [13.11.2025 13:23:22] -> PaymentMethod: card, TotalAmount: 700, Status: Payment successful
+[2025-11-13T13:23:22.966Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-13T13:23:22.975Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-13T13:23:23.067Z] [WMS] [ORD-2025-10-16-7891] Bestellung empfangen
+[2025-11-13T13:23:23.104Z] [OMS] [ORD-2025-10-16-7891] ✓ Published
+[2025-11-13T13:23:23.105Z] [OMS] [ORD-2025-10-16-7891] ✅ Bestellung erfolgreich verarbeitet (214ms)
+[2025-11-13T13:23:24.085Z] [WMS] [ORD-2025-10-16-7891] ITEMS_PICKED
+[2025-11-13T13:23:25.099Z] [WMS] [ORD-2025-10-16-7891] ORDER_PACKED
+[2025-11-13T13:23:26.112Z] [WMS] [ORD-2025-10-16-7891] ORDER_SHIPPED
+[2025-11-13T13:23:26.133Z] [WMS] [ORD-2025-10-16-7891] Bestellung abgeschlossen (3058ms)
+[2025-11-13T13:23:45.525Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-13T13:23:45.536Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 6
+[2025-11-13T13:23:45.541Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 18
+[2025-11-13T13:23:45.542Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-13T13:23:45.545Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-13T13:23:45.553Z] [PaymentAPI] [ORD-2025-10-16-7891] [13.11.2025 13:23:45] -> PaymentMethod: card, TotalAmount: 700, Status: Payment successful
+[2025-11-13T13:23:45.556Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-13T13:23:45.561Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-13T13:23:45.649Z] [WMS] [ORD-2025-10-16-7891] Bestellung empfangen
+[2025-11-13T13:23:45.689Z] [OMS] [ORD-2025-10-16-7891] ✓ Published
+[2025-11-13T13:23:45.691Z] [OMS] [ORD-2025-10-16-7891] ✅ Bestellung erfolgreich verarbeitet (167ms)
+[2025-11-13T13:23:46.648Z] [WMS] [ORD-2025-10-16-7891] ITEMS_PICKED
+[2025-11-13T13:23:47.643Z] [WMS] [ORD-2025-10-16-7891] ORDER_PACKED
+[2025-11-13T13:23:48.663Z] [WMS] [ORD-2025-10-16-7891] ORDER_SHIPPED
+[2025-11-13T13:23:48.679Z] [WMS] [ORD-2025-10-16-7891] Bestellung abgeschlossen (2870ms)
+[2025-11-13T13:23:53.864Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-13T13:23:53.874Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 4
+[2025-11-13T13:23:53.875Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 17
+[2025-11-13T13:23:53.876Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-13T13:23:53.877Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-13T13:23:53.888Z] [PaymentAPI] [ORD-2025-10-16-7891] [13.11.2025 13:23:53] -> PaymentMethod: card, TotalAmount: 700, Status: Payment successful
+[2025-11-13T13:23:53.890Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-13T13:23:53.893Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-13T13:23:53.996Z] [WMS] [ORD-2025-10-16-7891] Bestellung empfangen
+[2025-11-13T13:23:54.036Z] [OMS] [ORD-2025-10-16-7891] ✓ Published
+[2025-11-13T13:23:54.038Z] [OMS] [ORD-2025-10-16-7891] ✅ Bestellung erfolgreich verarbeitet (177ms)
+[2025-11-13T13:23:55.012Z] [WMS] [ORD-2025-10-16-7891] ITEMS_PICKED
+[2025-11-13T13:23:55.978Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-13T13:23:55.985Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 2
+[2025-11-13T13:23:55.986Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 16
+[2025-11-13T13:23:55.986Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-13T13:23:55.998Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-13T13:23:55.999Z] [PaymentAPI] [ORD-2025-10-16-7891] [13.11.2025 13:23:55] -> PaymentMethod: card, TotalAmount: 700, Status: Payment successful
+[2025-11-13T13:23:56.001Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-13T13:23:56.010Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-13T13:23:56.026Z] [WMS] [ORD-2025-10-16-7891] ORDER_PACKED
+[2025-11-13T13:23:56.078Z] [WMS] [ORD-2025-10-16-7891] Bestellung empfangen
+[2025-11-13T13:23:56.129Z] [OMS] [ORD-2025-10-16-7891] ✓ Published
+[2025-11-13T13:23:56.130Z] [OMS] [ORD-2025-10-16-7891] ✅ Bestellung erfolgreich verarbeitet (151ms)
+[2025-11-13T13:23:57.042Z] [WMS] [ORD-2025-10-16-7891] ORDER_SHIPPED
+[2025-11-13T13:23:57.065Z] [WMS] [ORD-2025-10-16-7891] Bestellung abgeschlossen (3057ms)
+[2025-11-13T13:23:57.087Z] [WMS] [ORD-2025-10-16-7891] ITEMS_PICKED
+[2025-11-13T13:23:58.092Z] [WMS] [ORD-2025-10-16-7891] ORDER_PACKED
+[2025-11-13T13:23:59.094Z] [WMS] [ORD-2025-10-16-7891] ORDER_SHIPPED
+[2025-11-13T13:23:59.104Z] [WMS] [ORD-2025-10-16-7891] Bestellung abgeschlossen (3034ms)
+[2025-11-13T13:24:17.645Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-13T13:24:17.656Z] [Inventory Service] -> OK: 2x P-0001 reserviert. Neuer Bestand: 0
+[2025-11-13T13:24:17.657Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 15
+[2025-11-13T13:24:17.658Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-13T13:24:17.661Z] [OMS] [ORD-2025-10-16-7891] → Payment: POST http://localhost:5167/PaymentService
+[2025-11-13T13:24:17.668Z] [PaymentAPI] [ORD-2025-10-16-7891] [13.11.2025 13:24:17] -> PaymentMethod: card, TotalAmount: 700, Status: Payment successful
+[2025-11-13T13:24:17.671Z] [OMS] [ORD-2025-10-16-7891] ← Payment: {"orderId":"ORD-2025-10-16-7891","paymentStatus":"approved"}
+[2025-11-13T13:24:17.676Z] [OMS] [ORD-2025-10-16-7891] → RabbitMQ publish
+[2025-11-13T13:24:17.776Z] [WMS] [ORD-2025-10-16-7891] Bestellung empfangen
+[2025-11-13T13:24:17.826Z] [OMS] [ORD-2025-10-16-7891] ✓ Published
+[2025-11-13T13:24:17.827Z] [OMS] [ORD-2025-10-16-7891] ✅ Bestellung erfolgreich verarbeitet (186ms)
+[2025-11-13T13:24:18.803Z] [WMS] [ORD-2025-10-16-7891] ITEMS_PICKED
+[2025-11-13T13:24:19.354Z] [OMS] [ORD-2025-10-16-7891] → Neue Bestellung empfangen
+[2025-11-13T13:24:19.359Z] [Inventory Service] -> FEHLER: P-0001 nicht verfügbar. Verfügbar: 0, Benötigt: 2
+[2025-11-13T13:24:19.359Z] [Inventory Service] -> OK: 1x P-0002 reserviert. Neuer Bestand: 14
+[2025-11-13T13:24:19.360Z] [Inventory Service] Prüfung abgeschlossen, sende Status-Liste.
+[2025-11-13T13:24:19.365Z] [OMS] [ORD-2025-10-16-7891] ✖ Bestellung abgebrochen (Inventar nicht ausreichend)
+[2025-11-13T13:24:19.859Z] [WMS] [ORD-2025-10-16-7891] ORDER_PACKED
+[2025-11-13T13:24:20.918Z] [WMS] [ORD-2025-10-16-7891] ORDER_SHIPPED
+[2025-11-13T13:24:20.934Z] [WMS] [ORD-2025-10-16-7891] Bestellung abgeschlossen (3090ms)
